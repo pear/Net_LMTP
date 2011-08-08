@@ -397,7 +397,34 @@ class Net_LMTP {
     function auth($uid, $pwd , $method = '')
     {
         if (!array_key_exists('AUTH', $this->_esmtp)) {
-            return new PEAR_Error('LMTP server does no support authentication');
+            if (!version_compare(PHP_VERSION, '5.1.0', '>=')) {
+                return new PEAR_Error('LMTP server does no support authentication');
+            }
+
+            if (!isset($this->_esmtp['STARTTLS'])) {
+                return PEAR::raiseError('LMTP server does not support authentication');
+            }
+
+            if (PEAR::isError($result = $this->_put('STARTTLS'))) {
+                return $result;
+            }
+
+            if (PEAR::isError($result = $this->_parseResponse(220))) {
+                return $result;
+            }
+
+            if (PEAR::isError($result = $this->_socket->enableCrypto(true, STREAM_CRYPTO_METHOD_TLS_CLIENT))) {
+                return $result;
+            } elseif ($result !== true) {
+                return PEAR::raiseError('STARTTLS failed');
+            }
+
+            /* Send LHLO again to recieve the AUTH string from the
+             * LMTP server. */
+            $this->_negotiate();
+            if (empty($this->_esmtp['AUTH'])) {
+                return PEAR::raiseError('LMTP server does not support authentication');
+            }
         }
 
         /*
