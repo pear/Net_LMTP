@@ -35,7 +35,7 @@ $pwd="password";
 
 //you can create a file called passwords.php and store your $user,$pass,$host and $port values in it
 // or you can modify this script
-@require_once("./passwords.php");
+require_once("./passwords.php");
 
 
 
