@@ -25,7 +25,7 @@ Provides an implementation of the RFC2033 LMTP using PEAR's Net_Socket and Auth_
     </notes>
     <state>stable</state>
     <filelist>
-      <file role="php" baseinstalldir="Net">LMTP.php</file>
+      <file role="php" baseinstalldir="/">Next/LMTP.php</file>
       <file role="test">test_lmtp.php</file>
     </filelist>
     <deps>
