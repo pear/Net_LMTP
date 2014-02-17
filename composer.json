@@ -1,0 +1,31 @@
+{
+    "authors": [
+        {
+            "email": "damlists@cnba.uba.ar",
+            "name": "Damian Alejandro Fernandez Sosa",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Net_LMTP": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/Net_LMTP",
+    "include-path": [
+        "./"
+    ],
+    "license": "PHP License",
+    "name": "pear/net_lmtp",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Net_LMTP",
+        "source": "https://github.com/pear/Net_LMTP"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
